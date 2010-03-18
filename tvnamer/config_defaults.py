@@ -95,7 +95,7 @@ defaults = {
 
         # foo s01e23 s01e24 s01e25 *
         '''
-        ^(?P<seriesname>.+?)[ \._\-]             # show name
+        ^((?P<seriesname>.+?)[ \._\-])?          # show name
         [Ss](?P<seasonnumber>[0-9]+)             # s01
         [\.\- ]?                                 # separator
         [Ee](?P<episodenumberstart>[0-9]+)       # first e23
@@ -111,7 +111,7 @@ defaults = {
 
         # foo.s01e23e24*
         '''
-        ^(?P<seriesname>.+?)[ \._\-]             # show name
+        ^((?P<seriesname>.+?)[ \._\-])?          # show name
         [Ss](?P<seasonnumber>[0-9]+)             # s01
         [\.\- ]?                                 # separator
         [Ee](?P<episodenumberstart>[0-9]+)       # first e23
@@ -135,7 +135,7 @@ defaults = {
 
         # foo.1x23x24*
         '''
-        ^(?P<seriesname>.+?)[ \._\-]             # show name
+        ^((?P<seriesname>.+?)[ \._\-])?          # show name
         (?P<seasonnumber>[0-9]+)                 # 1
         [xX](?P<episodenumberstart>[0-9]+)       # first x23
         ([xX][0-9]+)*                            # x24x25 etc
@@ -144,7 +144,7 @@ defaults = {
 
         # foo.s01e23-24*
         '''
-        ^(?P<seriesname>.+?)[ \._\-]             # show name
+        ^((?P<seriesname>.+?)[ \._\-])?          # show name
         [Ss](?P<seasonnumber>[0-9]+)             # s01
         [\.\- ]?                                 # separator
         [Ee](?P<episodenumberstart>[0-9]+)       # first e23
@@ -158,7 +158,7 @@ defaults = {
 
         # foo.1x23-24*
         '''
-        ^(?P<seriesname>.+?)[ \._\-]             # show name
+        ^((?P<seriesname>.+?)[ \._\-])?          # show name
         (?P<seasonnumber>[0-9]+)                 # 1
         [xX](?P<episodenumberstart>[0-9]+)       # first x23
         (                                        # -24 etc
@@ -188,7 +188,7 @@ defaults = {
         [^\\/]*$''',
 
         # foo.1x09*
-        '''^(?P<seriesname>.+?)[ \._\-]          # show name and padding
+        '''^((?P<seriesname>.+?)[ \._\-])?       # show name and padding
         \[?                                      # [ optional
         (?P<seasonnumber>[0-9]+)                 # season
         [xX]                                     # x
@@ -197,7 +197,7 @@ defaults = {
         [^\\/]*$''',
 
         # foo.s01.e01, foo.s01_e01
-        '''^(?P<seriesname>.+?)[ \._\-]
+        '''^((?P<seriesname>.+?)[ \._\-])?
         [Ss](?P<seasonnumber>[0-9]+)[\.\- ]?
         [Ee]?(?P<episodenumber>[0-9]+)
         [^\\/]*$''',
