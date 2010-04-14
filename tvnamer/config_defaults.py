@@ -52,6 +52,11 @@ defaults = {
     'output_filename_replacements': [
     ],
 
+    # Replacements are performed on the full path used by move_files feature,
+    # including the filename
+    'move_files_fullpath_replacements': [
+    ],
+
     # Language to (try) and retrieve episode data in
     'language': 'en',
 
@@ -185,7 +190,7 @@ defaults = {
         [Ss](?P<seasonnumber>[0-9]{2})
         [\.\- ]?
         (?P<episodenumber>[0-9]{2})
-        [^\\/]*$''',
+        [^0-9]*$''',
 
         # foo.1x09*
         '''^((?P<seriesname>.+?)[ \._\-])?       # show name and padding

@@ -40,6 +40,7 @@ try:
     # os.path.relpath was added in 2.6, use custom implimentation if not found
     relpath = os.path.relpath
 except AttributeError:
+
     def relpath(path, start=None):
         """Return a relative version of a path"""
 
@@ -125,7 +126,7 @@ def clear_temp_dir(location):
     shutil.rmtree(location)
 
 
-def run_tvnamer(with_files, with_flags = None, with_input = "", with_config = None):
+def run_tvnamer(with_files, with_flags = None, with_input = "", with_config = None, run_on_directory = False):
     """Runs tvnamer on list of file-names in with_files.
     with_files is a list of strings.
     with_flags is a list of command line arguments to pass to tvnamer.
@@ -148,8 +149,13 @@ def run_tvnamer(with_files, with_flags = None, with_input = "", with_config = No
     if with_flags is None:
         with_flags = []
 
+    if run_on_directory:
+        files = [episodes_location]
+    else:
+        files = dummy_files
+
     # Construct command
-    cmd = [sys.executable, tvnpath] + conf_args + with_flags + dummy_files
+    cmd = [sys.executable, tvnpath] + conf_args + with_flags + files
     p("Running command:")
     p(" ".join(cmd))
 

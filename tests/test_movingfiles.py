@@ -63,6 +63,7 @@ def test_cli_destination():
 
     verify_out_data(out_data, expected_files)
 
+
 def test_move_interactive_allyes():
     """Tests interactive UI for moving all files
     """
@@ -83,6 +84,7 @@ def test_move_interactive_allyes():
 
     verify_out_data(out_data, expected_files)
 
+
 def test_move_interactive_allno():
     """Tests interactive UI allows not moving any files
     """
@@ -102,6 +104,7 @@ def test_move_interactive_allno():
         'Scrubs - [01x02] - My Mentor.avi']
 
     verify_out_data(out_data, expected_files)
+
 
 def test_move_interactive_somefiles():
     """Tests interactive UI allows not renaming some files, renaming/moving others
@@ -124,5 +127,24 @@ def test_move_interactive_somefiles():
     expected_files = ['test/Scrubs - [01x01] - My First Day.avi',
         'scrubs.s01e02.avi',
         'Scrubs - [01x03] - My Best Friend\'s Mistake.avi']
+
+    verify_out_data(out_data, expected_files)
+
+
+def test_with_invalid_seriesname():
+    """Tests series name containing invalid filename characters
+    """
+
+    conf = """
+    {"move_files_enable": true,
+    "move_files_destination": "%(seriesname)s",
+    "batch": true}
+    """
+
+    out_data = run_tvnamer(
+        with_files = ['csi.miami.s01e01.avi'],
+        with_config = conf)
+
+    expected_files = ['CSI_ Miami/CSI_ Miami - [01x01] - Golden Parachute.avi']
 
     verify_out_data(out_data, expected_files)

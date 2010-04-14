@@ -73,6 +73,30 @@ files['s01e01_format'] = [
     'correctedseriesname': 'Arrested Development',
     'seasonnumber': 2, 'episodenumbers': [2],
     'episodenames': ['The One Where They Build a House']},
+
+    {'input': 'Horizon - s2008e02 - Total Isolation.avi',
+    'parsedseriesname': 'Horizon',
+    'correctedseriesname': 'Horizon',
+    'seasonnumber': 2008, 'episodenumbers': [2],
+    'episodenames': ['Total Isolation']},
+
+    {'input': 'Horizon.s2008e02.Total Isolation.avi',
+    'parsedseriesname': 'Horizon',
+    'correctedseriesname': 'Horizon',
+    'seasonnumber': 2008, 'episodenumbers': [2],
+    'episodenames': ['Total Isolation']},
+
+    {'input': 'Horizon - [2008x03] - Total Isolation.avi',
+    'parsedseriesname': 'Horizon',
+    'correctedseriesname': 'Horizon',
+    'seasonnumber': 2008, 'episodenumbers': [3],
+    'episodenames': ['What on Earth is Wrong With Gravity?']},
+
+    {'input': 'Scrubs.0101.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': 1, 'episodenumbers': [1],
+    'episodenames': ['My First Day']},
 ]
 
 files['misc'] = [
@@ -174,15 +198,28 @@ files['multiple_episodes'] = [
     'correctedseriesname': 'Scrubs',
     'seasonnumber': 1, 'episodenumbers': [22, 23],
     'episodenames': ['My Occurrence', 'My Hero']},
+
+    {'input': 'Scrubs - 01x22 01x23.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': 1, 'episodenumbers': [22, 23],
+    'episodenames': ['My Occurrence', 'My Hero']},
+
+    {'input': 'Scrubs.01x22.01x23.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': 1, 'episodenumbers': [22, 23],
+    'episodenames': ['My Occurrence', 'My Hero']},
+
+    {'input': 'Scrubs 1x22 1x23.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': 1, 'episodenumbers': [22, 23],
+    'episodenames': ['My Occurrence', 'My Hero']},
+
 ]
 
 files['unicode'] = [
-    {'input': u'DARKER THAN BLACK -\u9ed2\u306e\u5951\u7d04\u8005- - S01E01 (21st copy)',
-    'parsedseriesname': u'darker than black -\u9ed2\u306e\u5951\u7d04\u8005-',
-    'correctedseriesname': u'Darker than Black',
-    'seasonnumber': 1, 'episodenumbers': [1],
-    'episodenames': [u'\u5951\u7d04\u306e\u661f\u306f\u6d41\u308c\u305f\u2026\u524d\u7de8']},
-
     {'input': u'Carniv\xe0le 1x11 - The Day of the Dead',
     'parsedseriesname': u'Carniv\xe0le',
     'correctedseriesname': u'Carniv\xe0le',

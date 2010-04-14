@@ -122,6 +122,12 @@ def applyCustomOutputReplacements(cfile):
     return _applyReplacements(cfile, Config['output_filename_replacements'])
 
 
+def applyCustomFullpathReplacements(cfile):
+    """Applies custom replacements to full path, wraps _applyReplacements
+    """
+    return _applyReplacements(cfile, Config['move_files_fullpath_replacements'])
+
+
 def cleanRegexedSeriesName(seriesname):
     """Cleans up series name by removing any . and _
     characters, along with any trailing hyphens.
@@ -554,7 +560,7 @@ class Renamer(object):
         os.rename(self.filename, newpath)
         self.filename = newpath
 
-    def newPath(self, new_path, force = False, always_copy = False, always_move = False, create_dirs = True):
+    def newPath(self, new_path, force = False, always_copy = False, always_move = False, create_dirs = True, getPathPreview = False):
         """Moves the file to a new path.
 
         If it is on the same partition, it will be moved (unless always_copy is True)
@@ -573,8 +579,18 @@ class Renamer(object):
         # Join new filename onto new filepath
         new_fullpath = os.path.join(new_dir, old_filename)
 
+        if len(Config['move_files_fullpath_replacements']) > 0:
+            p("Before custom full path replacements: %s" % (new_fullpath))
+            new_fullpath = applyCustomFullpathReplacements(new_fullpath)
+            new_dir = os.path.dirname(new_fullpath)
+
+        p("New path: %s" % new_fullpath)
+
+        if getPathPreview:
+            return new_dir
+
         if create_dirs:
-            print "Creating %s" % new_dir
+            p("Creating %s" % new_dir)
             try:
                 os.makedirs(new_dir)
             except OSError, e:
@@ -590,19 +606,19 @@ class Renamer(object):
         if same_partition(self.filename, new_dir):
             if always_copy:
                 # Same partition, but forced to copy
-                print "copy %s to %s" % (self.filename, new_fullpath)
+                p("copy %s to %s" % (self.filename, new_fullpath))
                 shutil.copyfile(self.filename, new_fullpath)
             else:
                 # Same partition, just rename the file to move it
-                print "move %s to %s" % (self.filename, new_fullpath)
+                p("move %s to %s" % (self.filename, new_fullpath))
                 os.rename(self.filename, new_fullpath)
         else:
             # File is on different partition (different disc), copy it
-            print "copy %s to %s" % (self.filename, new_fullpath)
+            p("copy %s to %s" % (self.filename, new_fullpath))
             shutil.copyfile(self.filename, new_fullpath)
             if always_move:
                 # Forced to move file, we just trash old file
-                print "Deleting %s" % (self.filename)
+                p("Deleting %s" % (self.filename))
                 delete_file(self.filename)
 
         self.filename = new_fullpath
