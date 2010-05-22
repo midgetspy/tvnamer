@@ -1,11 +1,3 @@
-# Please note:
-
-*This README is in preparation of the new version 2.0, which will be released shortly.*
-
-*`easy_install tvnamer` will currently install the older version (1.4) of tvnamer. If you wish to use the latest version (2.0) right now, follow the "install from source" instructions bellow!*
-
--------
-
 # `tvnamer`
 
 `tvnamer` is a utility which to rename files from `some.show.s01e03.blah.abc.avi` to `Some Show - [01x03] - The Episode Name.avi` (by retrieving the episode name using data from [`tvdb_api`](http://github.com/dbr/tvdb_api))
@@ -152,6 +144,8 @@ If for example you wish to change the default language used to retrieve data, ch
     {
         "language": "fr"
     }
+
+If `search_all_languages` is true, tvnamer will return multilingual search results. If false, it will return results only in the preferred language.
 
 For an always up-to-date description of all config options, see the comments in [`config_defaults.py`](http://github.com/dbr/tvnamer/blob/master/tvnamer/config_defaults.py)
 

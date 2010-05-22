@@ -9,6 +9,9 @@
 """Test file names for tvnamer
 """
 
+import datetime
+
+
 files = {}
 
 files['default_format'] = [
@@ -93,6 +96,12 @@ files['s01e01_format'] = [
     'episodenames': ['What on Earth is Wrong With Gravity?']},
 
     {'input': 'Scrubs.0101.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': 1, 'episodenumbers': [1],
+    'episodenames': ['My First Day']},
+
+    {'input': 'Scrubs 1x01-720p.avi',
     'parsedseriesname': 'Scrubs',
     'correctedseriesname': 'Scrubs',
     'seasonnumber': 1, 'episodenumbers': [1],
@@ -216,7 +225,6 @@ files['multiple_episodes'] = [
     'correctedseriesname': 'Scrubs',
     'seasonnumber': 1, 'episodenumbers': [22, 23],
     'episodenames': ['My Occurrence', 'My Hero']},
-
 ]
 
 files['unicode'] = [
@@ -287,6 +295,22 @@ files['anime'] = [
     'correctedseriesname': 'Tokyo Magnitude 8.0',
     'seasonnumber': None, 'episodenumbers': [2],
     'episodenames': ['Broken World']},
+]
+
+files['misc'] = [
+    {'input': 'Scrubs.2001-10-02.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': -1, 'episodenumbers': [datetime.date(2001, 10, 2)],
+    'episodenames': ['My First Day']},
+]
+
+files['x_of_x'] = [
+    {'input': 'Scrubs.1of5.avi',
+    'parsedseriesname': 'Scrubs',
+    'correctedseriesname': 'Scrubs',
+    'seasonnumber': None, 'episodenumbers': [1],
+    'episodenames': ['My First Day']},
 ]
 
 

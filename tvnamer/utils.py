@@ -61,6 +61,23 @@ def getEpisodeName(tvdb_instance, episode):
         # Series was found, use corrected series name
         correctedShowName = show['seriesname']
 
+    if episode.seasonnumber == -1:
+        # Date-based episode
+        epnames = []
+        for cepno in episode.episodenumbers:
+            try:
+                sr = show.airedOn(cepno)
+                if len(sr) > 1:
+                    raise EpisodeNotFound(
+                        "Ambigious air date %s, there were %s episodes on that day" % (
+                        cepno, len(sr)))
+                epnames.append(sr[0]['episodename'])
+            except tvdb_episodenotfound:
+                raise EpisodeNotFound(
+                    "Episode that aired on %s could not be found" % (
+                    cepno))
+        return correctedShowName, epnames
+
     if episode.seasonnumber is None:
         # Series without concept of seasons have all episodes in season 1
         seasonnumber = 1
@@ -269,11 +286,15 @@ class FileParser(object):
                 elif 'episodenumber' in namedgroups:
                     episodenumbers = [int(match.group('episodenumber')), ]
 
-                elif 'date' in namedgroups:
-                    dateMatch = re.match(Config['date_pattern'], match.group('date'))
-                    episodenumbers = [datetime.date(int(dateMatch.group(1)),
-                                                    int(dateMatch.group(2)),
-                                                    int(dateMatch.group(3)))]
+                elif 'year' in namedgroups or 'month' in namedgroups or 'day' in namedgroups:
+                    if not all(['year' in namedgroups, 'month' in namedgroups, 'day' in namedgroups]):
+                        raise ConfigValueError(
+                            "Date-based regex must contain groups 'year', 'month' and 'day'")
+                    match.group('year')
+
+                    episodenumbers = [datetime.date(int(match.group('year')),
+                                                    int(match.group('month')),
+                                                    int(match.group('day')))]
 
                 else:
                     raise ConfigValueError(
@@ -284,7 +305,7 @@ class FileParser(object):
 
                 if 'seasonnumber' in namedgroups:
                     seasonnumber = int(match.group('seasonnumber'))
-                elif 'date' in namedgroups:
+                elif 'year' in namedgroups and 'month' in namedgroups and 'day' in namedgroups:
                     seasonnumber = -1
                 else:
                     # No season number specified, usually for Anime
@@ -383,7 +404,7 @@ def makeValidFilename(value, normalize_unicode = False, windows_safe = False, cu
         # : is technically allowed, but Finder will treat it as / and will
         # generally cause weird behaviour, so treat it as invalid.
         blacklist = r"/:"
-    elif sysname == 'Linux':
+    elif sysname in ['Linux', 'FreeBSD']:
         blacklist = r"/"
     else:
         # platform.system docs say it could also return "Windows" or "Java".
