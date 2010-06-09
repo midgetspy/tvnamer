@@ -542,12 +542,10 @@ class EpisodeInfo(object):
             'ext': prep_extension}
 
         if self.episodename is None:
-            if self.seasonnumber is None:
+            if self.seasonnumber in (None, -1):
                 fname = Config['filename_without_episode_no_season'] % epdata
             elif len(self.episodenumbers) == 1 and self.episodenumbers[0] == -1:
                 fname = Config['filename_season_only_without_episode'] % epdata
-            elif self.seasonnumber == -1:
-                fname = Config['filename_with_date_without_episode'] % epdata
             else:
                 fname = Config['filename_without_episode'] % epdata
         else:
@@ -557,12 +555,10 @@ class EpisodeInfo(object):
                     join_with = Config['multiep_join_name_with']
                 )
 
-            if self.seasonnumber is None:
+            if self.seasonnumber in (None, -1):
                 fname = Config['filename_with_episode_no_season'] % epdata
             elif len(self.episodenumbers) == 1 and self.episodenumbers[0] == -1:
                 fname = Config['filename_season_only_with_episode'] % epdata
-            elif self.seasonnumber == -1:
-                fname = Config['filename_with_date_and_episode'] % epdata
             else:
                 fname = Config['filename_with_episode'] % epdata
 
