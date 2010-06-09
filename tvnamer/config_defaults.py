@@ -226,6 +226,11 @@ defaults = {
         [Ee]?[ ]?(?P<episodenumber>[0-9]+)
         [^\\/]*$''',
 
+        # scene.name.s02.etc (whole season, episode = -1)
+        '''^((?P<seriesname>.+?)[ \._])?
+        [Ss](?P<seasonnumberonly>[0-9]+)[\.\_ ]+
+        [^\/]*$''',
+
         # Show - Episode 9999 [S 12 - Ep 131] - etc
         '''
         (?P<seriesname>.+)                       # Showname
@@ -275,8 +280,12 @@ defaults = {
     # and with/without season number.
     'filename_with_episode':
      '%(seriesname)s - [%(seasonno)02dx%(episode)s] - %(episodename)s%(ext)s',
+    'filename_season_only_with_episode':
+     '%(seriesname)s - [S%(seasonno)02d] - %(episodename)s%(ext)s',
     'filename_without_episode':
      '%(seriesname)s - [%(seasonno)02dx%(episode)s]%(ext)s',
+    'filename_season_only_without_episode':
+     '%(seriesname)s - [S%(seasonno)02d]%(ext)s',
      'filename_with_episode_no_season':
       '%(seriesname)s - [%(episode)s] - %(episodename)s%(ext)s',
      'filename_without_episode_no_season':
