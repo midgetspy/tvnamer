@@ -325,10 +325,16 @@ class FileParser(object):
                 if seriesname != None:
                     seriesname = cleanRegexedSeriesName(seriesname)
 
+                if 'episodename' in namedgroups:
+                    episodename = match.group('episodename')
+                else:
+                    episodename = None
+
                 episode = EpisodeInfo(
                     seriesname = seriesname,
                     seasonnumber = seasonnumber,
                     episodenumbers = episodenumbers,
+                    episodename = episodename,
                     filename = self.path)
                 return episode
         else:
