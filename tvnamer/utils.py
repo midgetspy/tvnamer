@@ -17,7 +17,7 @@ import shutil
 import logging
 import platform
 
-from tvdb_api import (tvdb_error, tvdb_shownotfound, tvdb_seasonnotfound,
+from lib.tvdb_api.tvdb_api import (tvdb_error, tvdb_shownotfound, tvdb_seasonnotfound,
 tvdb_episodenotfound, tvdb_attributenotfound, tvdb_userabort)
 
 from unicode_helper import p
