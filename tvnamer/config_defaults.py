@@ -146,8 +146,8 @@ defaults = {
         ^((?P<seriesname>.+?)[ \._\-])?          # show name
         (?P<seasonnumber>[0-9]+)                 # 1
         [xX](?P<episodenumberstart>[0-9]+)       # first x23
-        ([xX][0-9]+)*                            # x24x25 etc
-        [xX](?P<episodenumberend>[0-9]+)         # final episode num
+        (\-?[xX][0-9]+)*                            # x24x25 etc
+        \-?[xX](?P<episodenumberend>[0-9]+)         # final episode num
         ([\.\- ]+(?P<episodename>.+?)(\.(?P<ext>\w{3,4}))?$)?           # get the episode name & extension if it is available
         [^\/]*$''',
 
@@ -291,6 +291,15 @@ defaults = {
         \.\w+$                                   # dirnames should never be this stupid so require an extension
         ''',
 
+        # Show.Name.Part.1
+        '''^(?i)
+        (?P<seriesname>.+?)                      # Show name
+        [ \._\-]                                 # Padding
+        (?:part|pt)[\._ -]?
+        (?P<episodenumber>[0-9]+|[ivx]+)         # Part 1 
+        [\._ -][^\\/]*$                          # More padding, then anything
+        ''',
+        
     ],
 
     # Formats for renamed files. Variations for with/without episode,
