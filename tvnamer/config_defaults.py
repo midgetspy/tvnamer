@@ -291,7 +291,22 @@ defaults = {
         \.\w+$                                   # dirnames should never be this stupid so require an extension
         ''',
 
-        # Show.Name.Part.1
+        # Show.Name.Part.1.and.Part.2
+        '''^(?i)
+        (?P<seriesname>.+?)                      # Show name
+        [ \._\-]                                 # Padding
+        (?:part|pt)?[\._ -]
+        (?P<episodenumberstart>[0-9]+|[ivx]+)    # Part 1 
+        (?:[ \._-](?:and|&|to)                            # and
+        [ \._-](?:part|pt)?            # Part 2
+        [ \._-](?:[0-9]+|[ivx]+))*                      # (middle group, optional)
+        [ \._-](?:and|&|to)                             # and
+        [ \._-]?(?:part|pt)?            # Part 3
+        [ \._-](?P<episodenumberend>[0-9]+|[ivx]+)      # last episode number, save it 
+        [\._ -][^\\/]*$                          # More padding, then anything
+        ''',
+        
+        # Show.Name.Part.1 or Part.VII
         '''^(?i)
         (?P<seriesname>.+?)                      # Show name
         [ \._\-]                                 # Padding
