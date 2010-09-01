@@ -85,7 +85,7 @@ def roman_to_int(input):
     ...
    ValueError: input is not a valid roman numeral: IL
    """
-   if type(input) != type(""):
+   if type(input) not in (str, unicode):
       raise TypeError, "expected string, got %s" % type(input)
    input = input.upper()
    nums = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
